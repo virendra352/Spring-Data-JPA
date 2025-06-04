@@ -1,6 +1,9 @@
 package com.Applicant.controller;
 
 import com.Applicant.config.JwtUtils;
+import com.Applicant.customPropertiesLoad.AppConfigLoad;
+import com.Applicant.customPropertiesLoad.ConfigurationPropertiesTest;
+import com.Applicant.customPropertiesLoad.EnviornmentTest;
 import com.Applicant.entity.AppUser;
 import com.Applicant.entity.AuthRequest;
 import com.Applicant.repository.SecurityRepo.AppUserRepository;
@@ -30,6 +33,22 @@ public class RoleController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AppConfigLoad appConfigLoad;
+    @Autowired
+    ConfigurationPropertiesTest configurationPropertiesTest;
+
+    @Autowired
+    EnviornmentTest enviornmentTest;
+
+    @GetMapping("public/testing")
+    public void TestConfig(){
+        System.out.println("App config: ");
+        appConfigLoad.printConfig();
+        System.out.println("ConfigurationProperties : "+configurationPropertiesTest.getName());
+        enviornmentTest.printAppDetails();
+    }
 
     @GetMapping("/public")
     public String publicAccess() {
