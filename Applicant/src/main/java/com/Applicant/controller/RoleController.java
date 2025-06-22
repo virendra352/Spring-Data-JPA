@@ -6,6 +6,7 @@ import com.Applicant.customPropertiesLoad.ConfigurationPropertiesTest;
 import com.Applicant.customPropertiesLoad.EnviornmentTest;
 import com.Applicant.entity.AppUser;
 import com.Applicant.entity.AuthRequest;
+import com.Applicant.exceptionHandle.ResourceNotFoundException;
 import com.Applicant.repository.SecurityRepo.AppUserRepository;
 import com.Applicant.service.SecurityService.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class RoleController {
 
     @GetMapping("public/testing")
     public void TestConfig(){
-        System.out.println("App config: ");
+        System.out.println("App config: Running !!!!!");
         appConfigLoad.printConfig();
         System.out.println("ConfigurationProperties : "+configurationPropertiesTest.getName());
         enviornmentTest.printAppDetails();
@@ -52,6 +53,9 @@ public class RoleController {
 
     @GetMapping("/public")
     public String publicAccess() {
+        if(true){
+            throw new RuntimeException("Resource is not available : "+ " public Testing");
+        }
         return "This is public";
     }
     @PostMapping("/public/create-user")
